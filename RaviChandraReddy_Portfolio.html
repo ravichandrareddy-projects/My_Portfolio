@@ -293,7 +293,7 @@
   }
   .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
     gap: 1.5rem;
   }
   .project-card {
@@ -321,6 +321,8 @@
   .project-card.green::before { background: var(--accent); }
   .project-card.blue::before { background: var(--accent2); }
   .project-card.orange::before { background: var(--accent3); }
+  .project-card.purple::before { background: var(--accent4); }
+  .project-card.cyan::before { background: linear-gradient(90deg, var(--accent2), var(--accent)); }
   .project-card:hover { border-color: rgba(98,214,255,0.42); transform: translateY(-4px); box-shadow: 0 24px 70px rgba(0,0,0,0.42); }
   .project-card:hover::before { opacity: 1; }
   .project-icon {
@@ -363,6 +365,7 @@
   .tag.green { border-color: rgba(185,255,102,0.32); color: var(--accent); background: rgba(185,255,102,0.075); }
   .tag.blue { border-color: rgba(98,214,255,0.32); color: var(--accent2); background: rgba(98,214,255,0.075); }
   .tag.orange { border-color: rgba(255,159,110,0.32); color: var(--accent3); background: rgba(255,159,110,0.075); }
+  .tag.purple { border-color: rgba(215,140,255,0.32); color: var(--accent4); background: rgba(215,140,255,0.075); }
   .project-metric {
     font-family: var(--mono);
     font-size: 0.75rem;
@@ -575,12 +578,20 @@
 
 @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; }
+    .nav-logo { font-size: 0.68rem; max-width: 100%; white-space: normal; line-height: 1.35; }
     .nav-links { display: none; }
     #hero, section, #contact, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+    #hero { min-height: auto; padding-top: 7rem; }
+    h1 { font-size: clamp(2.6rem, 16vw, 4rem); }
+    h2 { margin-bottom: 2rem; }
     .about-grid { grid-template-columns: 1fr; }
+    .project-card, .timeline-item, .cert-card { padding: 1.25rem; }
     .timeline-item, .cert-timeline .timeline-item { grid-template-columns: 1fr; gap: 0.5rem; }
-    .hero-stats { position: static; margin-top: 3rem; flex-wrap: wrap; gap: 1.5rem; }
+    .hero-stats { position: static; margin-top: 3rem; flex-wrap: wrap; gap: 0.85rem; }
     .stat { text-align: left; }
+    .contact-links { gap: 0.75rem; }
+    .contact-link { width: 100%; max-width: 360px; overflow-wrap: anywhere; }
+    footer { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
   }
 </style>
 </head>
@@ -607,7 +618,7 @@
   <div class="hero-cta">
     <a href="mailto:ravichandra.reddy2712@gmail.com" class="btn btn-primary">Get in touch</a>
     <a href="#projects" class="btn btn-outline">View projects</a>
-    <a href="https://drive.google.com/file/d/1IzL3bwbIUAROkQM3hnvHsEfunzhI8Rv_/view?usp=sharing" target="_blank" rel="noopener" class="btn btn-outline">Resume</a>
+    <a href="https://github.com/ravichandrareddy2712" target="_blank" rel="noopener" class="btn btn-outline">GitHub</a>
   </div>
   <div class="hero-stats">
     <div class="stat">
@@ -615,11 +626,11 @@
       <span class="stat-label">Peak Accuracy</span>
     </div>
     <div class="stat">
-      <span class="stat-num">3+</span>
+      <span class="stat-num">5+</span>
       <span class="stat-label">AI Projects</span>
     </div>
     <div class="stat">
-      <span class="stat-num">6</span>
+      <span class="stat-num">7</span>
       <span class="stat-label">Internships</span>
     </div>
   </div>
@@ -631,59 +642,66 @@
   <h2>About me</h2>
   <div class="about-grid">
     <div class="about-text">
-      <p>I'm Munnamgi Ravi Chandra Reddy, a final-year B.Tech student at Kallam Haranadhareddy Institute of Technology (AI &amp; DS stream, CGPA 7.96). I write Python every day and genuinely enjoy the full arc — from exploratory data analysis to deploying a working model.</p>
-      <p>My projects span computer vision, desktop automation, and on-device ML for mobile. I don't chase buzzwords; I chase problems that have real-world impact. Currently building HIW, an AI nutrition app that estimates calories from food photos.</p>
-      <p>I'm AWS Cloud Practitioner certified and Cisco NetAcad trained, which gives me confidence working across the full stack — from model training to cloud deployment.</p>
+      <p>I'm Munnamgi Ravi Chandra Reddy, a final-year B.Tech student at Kallam Haranadhareddy Institute of Technology (AI &amp; DS stream, CGPA 8.01). I work with Python, core machine learning concepts, and practical AI systems for real-world problems.</p>
+      <p>My projects span computer vision, exam practice platforms, IoT-based detection, desktop automation, and nutrition tracking. I enjoy taking ideas from preprocessing and model evaluation all the way into usable applications.</p>
+      <p>I'm AWS Cloud Practitioner certified and Cisco NetAcad trained, with hands-on exposure to Git, Jupyter Notebook, Google Colab, Power BI, and common data science libraries.</p>
     </div>
     <div class="skills-block" id="skills">
       <div class="skill-row">
         <div class="skill-header">
-          <span class="skill-name">Python / ML Engineering</span>
+          <span class="skill-name">Python</span>
           <span class="skill-pct">90%</span>
         </div>
         <div class="skill-bar"><div class="skill-fill" style="width:0%" data-width="90%"></div></div>
       </div>
       <div class="skill-row">
         <div class="skill-header">
-          <span class="skill-name">Computer Vision / CNNs</span>
-          <span class="skill-pct">80%</span>
+          <span class="skill-name">Supervised &amp; Unsupervised Learning</span>
+          <span class="skill-pct">82%</span>
         </div>
-        <div class="skill-bar"><div class="skill-fill" style="width:0%" data-width="80%"></div></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:0%" data-width="82%"></div></div>
       </div>
       <div class="skill-row">
         <div class="skill-header">
-          <span class="skill-name">scikit-learn / Pandas / NumPy</span>
+          <span class="skill-name">CNN / Transfer Learning</span>
           <span class="skill-pct">85%</span>
         </div>
         <div class="skill-bar"><div class="skill-fill" style="width:0%" data-width="85%"></div></div>
       </div>
       <div class="skill-row">
         <div class="skill-header">
-          <span class="skill-name">Transfer Learning</span>
-          <span class="skill-pct">70%</span>
+          <span class="skill-name">NumPy / Pandas / Matplotlib / scikit-learn</span>
+          <span class="skill-pct">86%</span>
         </div>
-        <div class="skill-bar"><div class="skill-fill" style="width:0%" data-width="70%"></div></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:0%" data-width="86%"></div></div>
       </div>
       <div class="skill-row">
         <div class="skill-header">
-          <span class="skill-name">NLP (NLTK)</span>
+          <span class="skill-name">Data Preprocessing / Feature Engineering</span>
+          <span class="skill-pct">84%</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill" style="width:0%" data-width="84%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-header">
+          <span class="skill-name">Model Evaluation / Regularization</span>
+          <span class="skill-pct">78%</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill" style="width:0%" data-width="78%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-header">
+          <span class="skill-name">Git / Jupyter / Colab / Power BI</span>
+          <span class="skill-pct">76%</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill" style="width:0%" data-width="76%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-header">
+          <span class="skill-name">DSA / SQL</span>
           <span class="skill-pct">60%</span>
         </div>
         <div class="skill-bar"><div class="skill-fill" style="width:0%" data-width="60%"></div></div>
-      </div>
-      <div class="skill-row">
-        <div class="skill-header">
-          <span class="skill-name">AWS / Cloud</span>
-          <span class="skill-pct">65%</span>
-        </div>
-        <div class="skill-bar"><div class="skill-fill" style="width:0%" data-width="65%"></div></div>
-      </div>
-      <div class="skill-row">
-        <div class="skill-header">
-          <span class="skill-name">Flutter / Mobile ML</span>
-          <span class="skill-pct">55%</span>
-        </div>
-        <div class="skill-bar"><div class="skill-fill" style="width:0%" data-width="55%"></div></div>
       </div>
     </div>
   </div>
@@ -722,10 +740,36 @@
       <div class="project-metric">Task time reduction: <span>~30%</span></div>
     </div>
 
+    <div class="project-card purple">
+      <div class="project-icon">📝</div>
+      <div class="project-name">SeatCracker <span style="font-size:0.7rem;color:var(--muted);font-family:var(--mono);margin-left:0.5rem">ongoing</span></div>
+      <div class="project-desc">AI-based exam practice platform where users can take mock tests for competitive exams. Built a pipeline to extract questions from PDF files using OCR and convert them into structured formats for easier practice and tracking.</div>
+      <div class="project-tags">
+        <span class="tag purple">OCR</span>
+        <span class="tag purple">PDF Processing</span>
+        <span class="tag">Web Platform</span>
+        <span class="tag">Structured Data</span>
+      </div>
+      <div class="project-metric">Focus: <span>Mock tests</span> &nbsp;·&nbsp; Pipeline: <span>PDF to questions</span></div>
+    </div>
+
+    <div class="project-card cyan">
+      <div class="project-icon">📡</div>
+      <div class="project-name">IoT-Based Animal Detection</div>
+      <div class="project-desc">Real-time animal detection system using computer vision with Raspberry Pi. Integrated PIR motion sensors to trigger detection, send captured data to the cloud, and display monitoring results on a connected screen.</div>
+      <div class="project-tags">
+        <span class="tag blue">Computer Vision</span>
+        <span class="tag blue">Raspberry Pi</span>
+        <span class="tag">PIR Sensors</span>
+        <span class="tag">Cloud Monitoring</span>
+      </div>
+      <div class="project-metric">System: <span>Real-time detection</span> &nbsp;·&nbsp; Hardware: <span>Raspberry Pi</span></div>
+    </div>
+
     <div class="project-card orange">
       <div class="project-icon">🥗</div>
       <div class="project-name">HIW <span style="font-size:0.7rem;color:var(--muted);font-family:var(--mono);margin-left:0.5rem">ongoing</span></div>
-      <div class="project-desc">AI-powered mobile nutrition app that classifies 10+ food items from camera images and estimates calorie &amp; nutritional values. Built with Flutter and on-device ML, with a scheduled meal reminder system.</div>
+      <div class="project-desc">Health and wellness app for estimating nutritional values from food data and images. Implements basic ML models to classify food items, calculate calorie intake, and remind users to track meals consistently.</div>
       <div class="project-tags">
         <span class="tag orange">Flutter</span>
         <span class="tag orange">On-device ML</span>
@@ -733,7 +777,7 @@
         <span class="tag">Mobile AI</span>
         <span class="tag">Computer Vision</span>
       </div>
-      <div class="project-metric">Food categories: <span>10+</span> &nbsp;·&nbsp; Platform: <span>Cross-platform</span></div>
+      <div class="project-metric">Focus: <span>Nutrition tracking</span> &nbsp;·&nbsp; Status: <span>Ongoing</span></div>
     </div>
 
   </div>
@@ -802,6 +846,18 @@
         <div class="tl-title">Zero Trust Security Internship</div>
         <div class="tl-desc">Analysed Zero Trust architecture across 4+ security domains — identity, device, network, and application security. Developed understanding of modern cloud security frameworks and how they apply to enterprise systems.</div>
         <a class="tl-link" href="https://drive.google.com/file/d/1iDCMq7m7dWQz5IfixaPcQuuP3PQpi3Ls/view?usp=sharing" target="_blank" rel="noopener">View certificate</a>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-left">
+        <div class="tl-org">Cisco NetAcad</div>
+        <div class="tl-period">Training</div>
+      </div>
+      <div class="tl-right">
+        <div class="tl-title">Network Essentials</div>
+        <div class="tl-desc">Gained a practical foundation in networking, routing, switching, IP addressing, and connected system fundamentals.</div>
+        <a class="tl-link" href="https://drive.google.com/file/d/1ViHptG-kDbryszyIMoeyDlw5_NsEfVQY/view?usp=sharing" target="_blank" rel="noopener">View certificate</a>
       </div>
     </div>
 
@@ -889,7 +945,7 @@
       <div class="tl-left">
         <div class="cert-icon py">C++</div>
         <div>
-          <div class="tl-org">CodeTantra</div>
+          <div class="tl-org">Cisco</div>
           <div class="tl-period">OOP</div>
         </div>
       </div>
@@ -925,7 +981,7 @@
   <div class="contact-links">
     <a href="mailto:ravichandra.reddy2712@gmail.com" class="contact-link">ravichandra.reddy2712@gmail.com</a>
     <a href="https://linkedin.com/in/ravi-chandra-reddy-munnamgi" target="_blank" class="contact-link">LinkedIn</a>
-    <a href="https://drive.google.com/file/d/1IzL3bwbIUAROkQM3hnvHsEfunzhI8Rv_/view?usp=sharing" target="_blank" rel="noopener" class="contact-link">Resume</a>
+    <a href="https://github.com/ravichandrareddy2712" target="_blank" rel="noopener" class="contact-link">GitHub</a>
     <a href="tel:+919440336396" class="contact-link">+91 94403 36396</a>
   </div>
 </section>
